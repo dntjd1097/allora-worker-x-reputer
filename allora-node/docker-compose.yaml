@@ -14,7 +14,7 @@ services:
             ]
         environment:
             - TOKENS=ETH:ethereum,BTC:bitcoin,SOL:solana,BNB:binancecoin,ARB:arbitrum
-            - ALLORA_VALIDATOR_API_URL=https://testnet-allora-rest.rhino-apis.com/
+            - ALLORA_VALIDATOR_API_URL=https://allora-rpc.testnet.allora.network/
             - DATABASE_PATH=/app/data/prices.db
             - CGC_API_KEY=your_cgc_api_key
         volumes:
