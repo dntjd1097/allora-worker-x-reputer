@@ -6,8 +6,8 @@
         "gas": "auto",
         "gasAdjustment": 1.5,
         "nodeRpc": "https://allora-rpc.testnet.allora.network/",
-        "maxRetries": 3,
-        "delay": 1,
+        "maxRetries": 12,
+        "delay": 5,
         "submitTx": true
     },
     "worker": [
