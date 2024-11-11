@@ -4,9 +4,10 @@
         "addressRestoreMnemonic": "xxx_your_mnemonic_here_xxx",
         "alloraHomeDir": "",
         "gas": "auto",
-        "gasAdjustment": 1.5,
+        "gasAdjustment": 2.0,
+        "gasPrices": 0.1,
         "nodeRpc": "https://allora-rpc.testnet.allora.network/",
-        "maxRetries": 12,
+        "maxRetries": 5,
         "delay": 5,
         "submitTx": true
     },
