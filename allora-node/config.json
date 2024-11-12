@@ -6,7 +6,7 @@
         "gas": "auto",
         "gasAdjustment": 2.0,
         "gasPrices": 0.1,
-        "nodeRpc": "https://allora-rpc.testnet.allora.network/",
+        "nodeRpc": "https://rpc-allora.mkv.one/",
         "maxRetries": 5,
         "delay": 5,
         "submitTx": true
