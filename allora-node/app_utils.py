@@ -6,6 +6,8 @@ from zipfile import ZipFile
 import pandas as pd
 import sqlite3
 from app_config import DATABASE_PATH, BLOCK_TIME_SECONDS, DATA_BASE_PATH, ALLORA_VALIDATOR_API_URL, URL_QUERY_LATEST_BLOCK
+import calendar
+
 
 # Function to check and create the table if not exists
 def check_create_table():
@@ -24,12 +26,27 @@ def check_create_table():
     except sqlite3.Error as e:
         print(f"An error occurred while creating the table: {str(e)}")
 
-def download_binance_data(symbol, interval, year, month, download_path):
+# def download_binance_data(symbol, interval, year, month, download_path):
+#     base_url = f"https://data.binance.vision/data/futures/um/daily/klines"
+#     with ThreadPoolExecutor() as executor:
+#         for day in range(1, 32):  # Assuming days range from 1 to 31
+#             url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{year}-{month:02d}-{day:02d}.zip"
+#             executor.submit(download_url, url, download_path)
+def download_binance_data(symbol, interval, year, month, day, download_path):
     base_url = f"https://data.binance.vision/data/futures/um/daily/klines"
     with ThreadPoolExecutor() as executor:
-        for day in range(1, 32):  # Assuming days range from 1 to 31
-            url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{year}-{month:02d}-{day:02d}.zip"
-            executor.submit(download_url, url, download_path)
+        prev_month = month - 1 if month > 1 else 12
+        prev_year = year if month > 1 else year - 1
+        
+        for m in [prev_month, month]:
+            y = prev_year if m == prev_month else year
+            start_day = day if m == prev_month else 1
+            last_day = day if m == month else calendar.monthrange(y, m)[1]
+            
+            for d in range(start_day, last_day + 1):
+                url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{y}-{m:02d}-{d:02d}.zip"
+                executor.submit(download_url, url, download_path)
+
 
 def download_url(url, download_path):
     target_file_path = os.path.join(download_path, os.path.basename(url)) 
@@ -122,6 +139,41 @@ def get_latest_network_block():
         return {}
 
 # Initialize price token function
+# def init_price_token(symbol, token_name, token_to):
+#     try:
+#         check_create_table()
+
+#         with sqlite3.connect(DATABASE_PATH) as conn:
+#             cursor = conn.cursor()
+#             cursor.execute("SELECT COUNT(*) FROM prices WHERE token=?", (token_name.lower(),))
+#             count = cursor.fetchone()[0]
+
+#         if count > 10000:
+#             print(f'Data already exists for {token_name} token, {count} entries')
+#             return
+        
+#         end_date = datetime.now()
+#         start_date = end_date.replace(day=1) - timedelta(days=1)
+#         start_date = start_date.replace(day=1)
+
+
+#         block_data = get_latest_network_block()
+#         latest_block_height = int(block_data['block']['header']['height'])
+
+#         start_date_epoch = int(start_date.timestamp())
+#         end_date_epoch = int(end_date.timestamp())
+
+#         symbol = f"{symbol.upper()}{token_to.upper()}T"
+#         interval = "1m"  # 1-minute interval data
+#         binance_data_path = os.path.join(DATA_BASE_PATH, "binance/futures-klines")
+#         download_path = os.path.join(binance_data_path, symbol.lower())
+#         download_binance_data(symbol, interval, end_date.year, end_date.month, download_path)
+#         extract_and_process_binance_data(token_name, download_path, start_date_epoch, end_date_epoch, latest_block_height)
+
+#         print(f'Data initialized successfully for {token_name} token')
+#     except Exception as e:
+#         print(f'Failed to initialize data for {token_name} token: {str(e)}')
+#         raise e
 def init_price_token(symbol, token_name, token_to):
     try:
         check_create_table()
@@ -136,7 +188,7 @@ def init_price_token(symbol, token_name, token_to):
             return
         
         end_date = datetime.now()
-        start_date = end_date - timedelta(days=31)
+        start_date = end_date - timedelta(days=30)
 
         block_data = get_latest_network_block()
         latest_block_height = int(block_data['block']['header']['height'])
@@ -148,7 +200,11 @@ def init_price_token(symbol, token_name, token_to):
         interval = "1m"  # 1-minute interval data
         binance_data_path = os.path.join(DATA_BASE_PATH, "binance/futures-klines")
         download_path = os.path.join(binance_data_path, symbol.lower())
-        download_binance_data(symbol, interval, end_date.year, end_date.month, download_path)
+        
+        for i in range(2):
+            download_date = end_date - timedelta(days=i*30)
+            download_binance_data(symbol, interval, download_date.year, download_date.month, download_date.day, download_path)
+        
         extract_and_process_binance_data(token_name, download_path, start_date_epoch, end_date_epoch, latest_block_height)
 
         print(f'Data initialized successfully for {token_name} token')
