@@ -121,7 +121,7 @@ services:
 
     allora-worker:
         container_name: allora-worker
-        image: alloranetwork/allora-offchain-node:latest
+        image: alloranetwork/allora-offchain-node:v0.5.1
         ports:
             - '2112:2112'
         volumes:
