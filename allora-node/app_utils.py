@@ -43,7 +43,7 @@ def download_binance_data(symbol, interval, year, month, day, download_path):
             start_day = day if m == prev_month else 1
             last_day = day if m == month else calendar.monthrange(y, m)[1]
             
-            for d in range(start_day, last_day + 1):
+            for d in range(start_day, last_day):
                 url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{y}-{m:02d}-{d:02d}.zip"
                 executor.submit(download_url, url, download_path)
 
