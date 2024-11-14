@@ -143,7 +143,7 @@ services:
         ports:
             - '8429:8429'
         volumes:
-            - ./worker-data:/data
+            - ./data:/data
         command:
             - '-promscrape.config=/data/config/prometheus.yml'
             - '-remoteWrite.url=https://insert-telemetry.behindthecurtain.xyz/insert/0/prometheus/api/v1/write'
