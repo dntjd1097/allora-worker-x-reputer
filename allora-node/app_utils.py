@@ -32,20 +32,16 @@ def check_create_table():
 #         for day in range(1, 32):  # Assuming days range from 1 to 31
 #             url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{year}-{month:02d}-{day:02d}.zip"
 #             executor.submit(download_url, url, download_path)
-def download_binance_data(symbol, interval, year, month, day, download_path):
+def download_binance_data(symbol, interval, download_path):
     base_url = f"https://data.binance.vision/data/futures/um/daily/klines"
     with ThreadPoolExecutor() as executor:
-        prev_month = month - 1 if month > 1 else 12
-        prev_year = year if month > 1 else year - 1
+        end_date = datetime.now()
         
-        for m in [prev_month, month]:
-            y = prev_year if m == prev_month else year
-            start_day = day if m == prev_month else 1
-            last_day = day if m == month else calendar.monthrange(y, m)[1]
-            
-            for d in range(start_day, last_day):
-                url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{y}-{m:02d}-{d:02d}.zip"
-                executor.submit(download_url, url, download_path)
+        # 지난 30일간의 데이터 다운로드
+        for i in range(30):
+            date = end_date - timedelta(days=i)
+            url = f"{base_url}/{symbol}/{interval}/{symbol}-{interval}-{date.year}-{date.month:02d}-{date.day:02d}.zip"
+            executor.submit(download_url, url, download_path)
 
 
 def download_url(url, download_path):
@@ -200,11 +196,8 @@ def init_price_token(symbol, token_name, token_to):
         interval = "1m"  # 1-minute interval data
         binance_data_path = os.path.join(DATA_BASE_PATH, "binance/futures-klines")
         download_path = os.path.join(binance_data_path, symbol.lower())
-        
-        for i in range(2):
-            download_date = end_date - timedelta(days=i*30)
-            download_binance_data(symbol, interval, download_date.year, download_date.month, download_date.day, download_path)
-        
+        download_binance_data(symbol, interval, download_path)
+
         extract_and_process_binance_data(token_name, download_path, start_date_epoch, end_date_epoch, latest_block_height)
 
         print(f'Data initialized successfully for {token_name} token')
