@@ -14,7 +14,7 @@ services:
             ]
         environment:
             - TOKENS=ETH:ethereum,BTC:bitcoin,SOL:solana,BNB:binancecoin,ARB:arbitrum
-            - ALLORA_VALIDATOR_API_URL=https://allora-api.testnet.allora.network/
+            - ALLORA_VALIDATOR_API_URL=https://api-allora.mkv.one/
             - DATABASE_PATH=/app/data/prices.db
             - CGC_API_KEY=your_cgc_api_key
         volumes:
@@ -27,7 +27,7 @@ services:
         environment:
             - DATABASE_PATH=/app/data/prices.db
             - API_PORT=8001
-            - ALLORA_VALIDATOR_API_URL=https://allora-api.testnet.allora.network/
+            - ALLORA_VALIDATOR_API_URL=https://api-allora.mkv.one/
             - TOKENS=ETH:ethereum,BTC:bitcoin,SOL:solana
             - INTERVAL_STEPS=10
             - LOOK_BACK=10
@@ -60,7 +60,7 @@ services:
         environment:
             - DATABASE_PATH=/app/data/prices.db
             - API_PORT=8002
-            - ALLORA_VALIDATOR_API_URL=https://allora-api.testnet.allora.network/
+            - ALLORA_VALIDATOR_API_URL=https://api-allora.mkv.one/
             - TOKENS=BNB:binancecoin,ARB:arbitrum
             - INTERVAL_STEPS=20
             - LOOK_BACK=10
@@ -93,7 +93,7 @@ services:
         environment:
             - DATABASE_PATH=/app/data/prices.db
             - API_PORT=8003
-            - ALLORA_VALIDATOR_API_URL=https://allora-api.testnet.allora.network/
+            - ALLORA_VALIDATOR_API_URL=https://api-allora.mkv.one/
             - INTERVAL_STEPS=1440
             - LOOK_BACK=1440
             - PREDICTION_STEPS=1440
@@ -122,6 +122,8 @@ services:
     allora-worker:
         container_name: allora-worker
         image: alloranetwork/allora-offchain-node:latest
+        ports:
+            - '2112:2112'
         volumes:
             - ./worker-data:/data
         depends_on:
@@ -134,3 +136,16 @@ services:
         env_file:
             - ./worker-data/env_file
         restart: unless-stopped
+
+    vmagent:
+        container_name: vm_agent
+        image: victoriametrics/vmagent:latest
+        ports:
+            - '8429:8429'
+        volumes:
+            - ./worker-data:/data
+        command:
+            - '-promscrape.config=/data/config/prometheus.yml'
+            - '-remoteWrite.url=https://insert-telemetry.behindthecurtain.xyz/insert/0/prometheus/api/v1/write'
+        depends_on:
+            - allora-worker

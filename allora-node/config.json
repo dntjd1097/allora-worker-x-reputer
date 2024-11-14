@@ -4,11 +4,13 @@
         "addressRestoreMnemonic": "xxx_your_mnemonic_here_xxx",
         "alloraHomeDir": "",
         "gas": "auto",
-        "gasAdjustment": 2.0,
-        "gasPrices": 0.1,
+        "gasAdjustment": 1.5,
+        "gasPrices": 0.08,
+        "maxFees": 200000,
         "nodeRpc": "https://rpc-allora.mkv.one/",
         "maxRetries": 5,
-        "delay": 5,
+        "retryDelay": 3,
+        "accountSequenceRetryDelay": 5,
         "submitTx": true
     },
     "worker": [
