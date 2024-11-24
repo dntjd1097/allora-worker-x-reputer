@@ -7,7 +7,7 @@
         "gasAdjustment": 2.0,
         "gasPrices": 0.1,
         "maxFees": 250000,
-        "nodeRpc": "https://allora-rpc.testnet.allora.network/",
+        "nodeRpc": "https://rpc-allora.mkv.one/",
         "maxRetries": 5,
         "retryDelay": 3,
         "accountSequenceRetryDelay": 5,
