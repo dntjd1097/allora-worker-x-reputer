@@ -8,8 +8,8 @@
         "gasPrices": 10,
         "maxFees": 25000000,
         "nodeRpc": "https://rpc-allora.mkv.one/",
-        "maxRetries": 5,
-        "retryDelay": 3,
+        "maxRetries": 1,
+        "retryDelay": 1,
         "accountSequenceRetryDelay": 5,
         "submitTx": true,
         "blockDurationEstimated": 10,
@@ -19,7 +19,7 @@
         {
             "topicId": 1,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 8,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
                 "Token": "ETH"
@@ -28,7 +28,7 @@
         {
             "topicId": 3,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 12,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
                 "Token": "BTC"
@@ -37,7 +37,7 @@
         {
             "topicId": 5,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 14,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
                 "Token": "SOL"
@@ -46,7 +46,7 @@
         {
             "topicId": 2,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 10,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-03:8003/inference/{Token}",
                 "Token": "ETH"
@@ -55,7 +55,7 @@
         {
             "topicId": 7,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 16,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-02:8002/inference/{Token}",
                 "Token": "ETH"
@@ -64,7 +64,7 @@
         {
             "topicId": 8,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 18,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-02:8002/inference/{Token}",
                 "Token": "BNB"
@@ -73,7 +73,7 @@
         {
             "topicId": 9,
             "inferenceEntrypointName": "api-worker-reputer",
-            "loopSeconds": 20,
+            "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-02:8002/inference/{Token}",
                 "Token": "ARB"
