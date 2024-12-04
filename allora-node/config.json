@@ -8,12 +8,10 @@
         "gasPrices": 10,
         "maxFees": 25000000,
         "nodeRpc": "https://rpc-allora.mkv.one/",
-        "maxRetries": 10,
-        "retryDelay": 5,
+        "maxRetries": 5,
+        "retryDelay": 3,
         "accountSequenceRetryDelay": 5,
-        "submitTx": true,
-        "blockDurationEstimated": 5,
-        "windowCorrectionFactor": 0.5
+        "submitTx": true
     },
     "worker": [
         {
