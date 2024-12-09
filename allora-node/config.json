@@ -19,7 +19,7 @@
     "worker": [
         {
             "topicId": 1,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -28,7 +28,7 @@
         },
         {
             "topicId": 2,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-03:8003/inference/{Token}",
@@ -37,7 +37,7 @@
         },
         {
             "topicId": 3,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -46,7 +46,7 @@
         },
         {
             "topicId": 4,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -55,7 +55,7 @@
         },
         {
             "topicId": 5,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -64,7 +64,7 @@
         },
         {
             "topicId": 6,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -73,7 +73,7 @@
         },
         {
             "topicId": 7,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-02:8002/inference/{Token}",
@@ -82,7 +82,7 @@
         },
         {
             "topicId": 8,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-02:8002/inference/{Token}",
@@ -91,7 +91,7 @@
         },
         {
             "topicId": 9,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-02:8002/inference/{Token}",
@@ -100,7 +100,7 @@
         },
         {
             "topicId": 13,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -109,7 +109,7 @@
         },
         {
             "topicId": 14,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -118,7 +118,7 @@
         },
         {
             "topicId": 15,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
@@ -127,7 +127,7 @@
         },
         {
             "topicId": 16,
-            "inferenceEntrypointName": "api-worker-reputer",
+            "inferenceEntrypointName": "apiAdapter",
             "loopSeconds": 5,
             "parameters": {
                 "InferenceEndpoint": "http://source-01:8001/inference/{Token}",
